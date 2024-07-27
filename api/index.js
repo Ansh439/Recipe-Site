@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import userRoutes from './routes/user.route.js'
+import authRoutes from './routes/auth.route.js'
 
 dotenv.config();
 
@@ -17,9 +18,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/',(req,res) => {
-    res.send("Hello Project")
-})
+app.use(express.json());
 
 app.listen(PORT, () => {
     console.log(`Server started running on ${PORT}`)
@@ -27,7 +26,17 @@ app.listen(PORT, () => {
 
 
 app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 
 
 
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    })
+})
 
