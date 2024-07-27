@@ -30,19 +30,19 @@ export default function Header() {
                 <FaMoon />
             </Button>
             <Link to='/signin'>
-                <Button gradientDuoTone={'greenToBlue'} >
+                <Button gradientDuoTone={'greenToBlue'} outline >
                     Sign-In
                 </Button>
             </Link>
             <NavbarToggle />
         </div>
             <Navbar.Collapse>
-                <Navbar.Link active={path === '/'} as={'div'}> 
+                <Navbar.Link active={path === '/'} as={'div'} className=' active:text-green-400'> 
                     <Link to='/'>
                         Home
                     </Link>
                 </Navbar.Link>
-                <Navbar.Link active={path === '/about'} as={'div'}>
+                <Navbar.Link active={path === '/about'} as={'div'} className=' active:text-green-400'>
                     <Link to='/about'>
                         About
                     </Link>

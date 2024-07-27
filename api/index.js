@@ -1,11 +1,20 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose';
 
 dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("mongoose connected!");
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+
+const PORT = process.env.PORT || 3000;
 
 app.get('/',(req,res) => {
     res.send("Hello Project")
