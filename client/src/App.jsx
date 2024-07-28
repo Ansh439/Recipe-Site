@@ -10,6 +10,7 @@ import PrivateDashboard from './components/PrivateDashboard'
 import CreatePost from './pages/CreatePost'
 import UpdatePost from './pages/UpdatePost'
 import PostPage from './pages/PostPage'
+import Search from './pages/Search'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/search' element={<Search />} />
         <Route element={<PrivateDashboard />} >
           <Route path='/dashboard' element={<Dashboard />} />   
           <Route path='/create-post' element={<CreatePost />} />         

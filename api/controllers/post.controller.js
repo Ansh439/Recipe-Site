@@ -3,7 +3,7 @@ import { errorHandler } from "../utils/error.js"
 
 export const create = async(req, res, next) =>  { 
 
-    if(!req.body.title || !req.body.content){
+    if(!req.body.title || !req.body.content || !req.body.ingredients){
         return next(errorHandler(400, "Please provide all the required fields"))
     }
 
@@ -34,8 +34,9 @@ export const getposts = async(req, res, next) => {
             ...(req.query.postId && {_id : req.query.postId}),
             ...(req.query.searchTerm && {
                 $or: [
-                    {title : {$regex : req.query.searchTerm, $option : 'i'}},
-                    {content : {$regex : req.query.searchTerm, $option : 'i'}},
+                    {title : {$regex : req.query.searchTerm, $options : 'i'}},
+                    {content : {$regex : req.query.searchTerm, $options : 'i'}},
+                    {ingredients : {$regex : req.query.searchTerm, $options : 'i'}},
                 ]
             }),
         })
@@ -91,6 +92,7 @@ export const updatepost = async (req, res, next) => {
                 $set: {
                     title: req.body.title,
                     content: req.body.content,
+                    ingredients : req.body.ingredients,
                     category: req.body.category,
                     image: req.body.image,
                 }

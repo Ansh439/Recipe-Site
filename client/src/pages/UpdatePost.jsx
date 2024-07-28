@@ -108,10 +108,13 @@ export default function UpdatePost() {
           onChange={(e) => setFormData({...formData, category: e.target.value})}
           value={formData.category}
         >
-          <option value='uncategorized'>Select a category</option>
-          <option value='javascript'>JavaScript</option>
-          <option value='reactjs'>React.js</option>
-          <option value='nextjs'>Next.js</option>
+            <option value='uncategorized'>Select a category</option>
+          <option value='quick'>Quick & Easy</option>
+          <option value='healthy'>Healthy</option>
+          <option value='meal'>Meal Prep</option>
+          <option value='breakfast'>Breakfast</option>
+          <option value='snack'>Snacks</option>
+          <option value='budget'>Budget Friendly</option>
         </Select>
       </div>
       <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
@@ -135,7 +138,10 @@ export default function UpdatePost() {
           />
         )
       }
-      <ReactQuill theme='snow' placeholder='Type something...' className='h-72 mb-12' required onChange={(value) => setFormData({...formData, content: value})} value={formData.content}/>
+      <div className='h-72 flex gap-2 md:flex-row mb-12'>
+        <ReactQuill theme='snow' placeholder='Write all the required Ingridients (recommended in bullet points)...' value={formData.ingredients} className=' mb-12' required onChange={(value) => setFormData({...formData, ingredients: value})} />
+        <ReactQuill theme='snow' value={formData.content} placeholder='Write process to make (recommended in bullet points)...' className='mb-12' required onChange={(value) => setFormData({...formData, content: value})} />
+      </div>
       <Button type='submit' gradientDuoTone='purpleToPink'>Update post</Button>
       {
         publishError && <Alert color='failure' className='mt-5'>

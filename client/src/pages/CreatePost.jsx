@@ -116,7 +116,10 @@ export default function CreatePost() {
           />
         )
       }
-      <ReactQuill theme='snow' placeholder='Type something...' className='h-72 mb-12' required onChange={(value) => setFormData({...formData, content: value})} />
+      <div className='h-72 flex gap-2 md:flex-row mb-12'>
+        <ReactQuill theme='snow' placeholder='Write all the required Ingridients (recommended in bullet points)...' className=' mb-12' required onChange={(value) => setFormData({...formData, ingredients: value})} />
+        <ReactQuill theme='snow' placeholder='Write process to make (recommended in bullet points)...' className='mb-12' required onChange={(value) => setFormData({...formData, content: value})} />
+      </div>
       <Button type='submit' gradientDuoTone='greenToBlue'>Publish</Button>
       {
         publishError && <Alert color='failure' className='mt-5'>

@@ -12,6 +12,11 @@ const postSchema = new mongoose.Schema(
             required: true
         },
 
+        ingredients: {
+            type: String,
+            required: true
+        },
+
         title: {
             type: String,
             required: true,
