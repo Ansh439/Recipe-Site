@@ -9,6 +9,7 @@ import About from './pages/About'
 import PrivateDashboard from './components/PrivateDashboard'
 import CreatePost from './pages/CreatePost'
 import UpdatePost from './pages/UpdatePost'
+import PostPage from './pages/PostPage'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path='/update-post/:postId' element = {<UpdatePost />} />
         </Route>
         <Route path='/about' element={<About />} />
+        <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
     </BrowserRouter>
   )
