@@ -6,7 +6,7 @@ import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/st
 import {app} from '../firebase.js' 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { updateStart, updateSuccess, updateFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess } from '../redux/user/userSlice.js'
+import { updateStart, updateSuccess, updateFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signoutSuccess } from '../redux/user/userSlice.js'
 
 export default function DashProfile() {
     const {currentUser, error} = useSelector(state => state.user)
@@ -29,6 +29,7 @@ export default function DashProfile() {
       setImageFileUrl(URL.createObjectURL(file));
     }
   }
+  
 
   useEffect(()=> {
     if(imageFile){
@@ -116,6 +117,22 @@ export default function DashProfile() {
     }
   }
 
+  const handleSignout = async(req, res, next) => {
+    try {
+      const res = await fetch('/api/user/signout', {
+        method: "POST",
+      })
+      const data = res.json();
+      if(res.ok){
+        dispatch(signoutSuccess());
+      }else{
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   const handleDeleteUser = async() => {
     setShowModal(false)
     try {
@@ -170,7 +187,7 @@ export default function DashProfile() {
       </form>
       <div className='text-red-500 flex justify-between mt-4'>
         <span className='cursor-pointer' onClick={() => setShowModal(true)}>Delete Account</span>
-        <span className='cursor-pointer'>Sign Out</span>
+        <span className='cursor-pointer' onClick={handleSignout}>Sign Out</span>
       </div>
       {updateUserSuccess && (
         <Alert color='success' className='mt-5'>
