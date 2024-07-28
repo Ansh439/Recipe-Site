@@ -12,12 +12,12 @@ export default function OAuth() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
+    const auth = getAuth(app);
 
     const handleGoogleClick = async() => {
       const provider = new GoogleAuthProvider();
       provider.setCustomParameters({prompt: 'select_account'})
-
-      const auth = getAuth(app);
 
       try{
         const resultsFromGoogle = await signInWithPopup(auth, provider);
@@ -27,7 +27,7 @@ export default function OAuth() {
           body: JSON.stringify({
             name: resultsFromGoogle.user.displayName,
             email: resultsFromGoogle.user.email,
-            googlePhotoURL: resultsFromGoogle.user.photoURL,
+            googlePhotoUrl: resultsFromGoogle.user.photoURL,
           }),
         })
 

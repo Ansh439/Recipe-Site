@@ -63,7 +63,7 @@ export const signin = async(req, res, next) => {
 
 export const google = async(req, res, next) => {
 
-    const {name, email, photoUrl} = req.body;
+    const {name, email, googlePhotoUrl} = req.body;
 
     try{
 
@@ -94,7 +94,7 @@ export const google = async(req, res, next) => {
                 username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
                 email,
                 password: bcryptPass,
-                profilePicture: photoUrl
+                profilePicture: googlePhotoUrl
             }) 
 
 
