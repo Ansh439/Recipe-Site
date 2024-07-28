@@ -32,6 +32,7 @@ export const getposts = async(req, res, next) => {
             ...(req.query.category && {category : req.query.category}),
             ...(req.query.slug && {slug : req.query.slug}),
             ...(req.query.postId && {_id : req.query.postId}),
+            ...(req.query.isSaved && {isSaved : req.query.isSaved}),
             ...(req.query.searchTerm && {
                 $or: [
                     {title : {$regex : req.query.searchTerm, $options : 'i'}},
@@ -90,6 +91,7 @@ export const updatepost = async (req, res, next) => {
             req.params.postId,
             {
                 $set: {
+                    isSaved: req.body.isSaved,
                     title: req.body.title,
                     content: req.body.content,
                     ingredients : req.body.ingredients,

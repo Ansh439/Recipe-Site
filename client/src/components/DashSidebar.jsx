@@ -53,6 +53,11 @@ export default function DashSidebar() {
                     </Link>  
                   )
                 }
+                <Link to='/dashboard?tab=save'>
+                    <SidebarItem active={tab === 'save'} icon={HiUser} labelColor="dark" as="div">
+                        Saved Posts
+                    </SidebarItem>
+                </Link>
                 <SidebarItem icon={HiArrowSmRight} className="cursor-pointer" onClick={handleSignout}>
                     Signout
                 </SidebarItem>

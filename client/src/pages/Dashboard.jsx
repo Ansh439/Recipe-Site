@@ -4,6 +4,7 @@ import DashSidebar from '../components/DashSidebar';
 import DashProfile from '../components/DashProfile';
 import { SiCodechef } from "react-icons/si";
 import DashPosts from '../components/DashPosts';
+import DashSave from '../components/DashSave';
 
 export default function Dashboard() {
   const location = useLocation();
@@ -25,6 +26,7 @@ export default function Dashboard() {
       </div>}
       {tab === 'profile' && <DashProfile />}
       {tab === 'posts' && <DashPosts />}
+      {tab === 'save' && <DashSave />}
     </div>
   )
 }
