@@ -7,9 +7,10 @@ import {app} from '../firebase.js'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { updateStart, updateSuccess, updateFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signoutSuccess } from '../redux/user/userSlice.js'
+import { Link } from 'react-router-dom'
 
 export default function DashProfile() {
-    const {currentUser, error} = useSelector(state => state.user)
+    const {currentUser, error, loading} = useSelector(state => state.user)
     const [imageFile, setImageFile] = useState(null)
     const [imageFileUrl, setImageFileUrl] = useState(null)
     const [imageUploadProgess, setImageUploadProgess] = useState(null)
@@ -181,9 +182,21 @@ export default function DashProfile() {
             <TextInput placeholder='username' type='text' id='username' defaultValue={currentUser.username} onChange={handleChange} />
             <TextInput placeholder='email' type='email' id='email' defaultValue={currentUser.email} onChange={handleChange} />
             <TextInput placeholder='password' type='password' id='password' onChange={handleChange} />
-            <Button type='submit' gradientDuoTone='purpleToBlue' outline>
-                Update
+            <Button type='submit' gradientDuoTone='greenToBlue' outline disabled={loading || imageFileUploading}>
+                {loading ? "loading..." : "Update"}
             </Button>
+            {
+                currentUser && (
+                    <Link to={'/create-post'}>
+                        <Button 
+                        type='button'
+                        gradientDuoTone='greenToBlue'
+                        className='w-full'>
+                            Create a post
+                        </Button>
+                    </Link>
+                )
+            }
       </form>
       <div className='text-red-500 flex justify-between mt-4'>
         <span className='cursor-pointer' onClick={() => setShowModal(true)}>Delete Account</span>
